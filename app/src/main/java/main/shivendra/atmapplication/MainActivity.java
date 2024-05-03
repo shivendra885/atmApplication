@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
                 if(withdrawAmount % 100 != 0) {
-                    Toast.makeText(MainActivity.this,"You can Withdraw only 100 ,200, 500, 2000", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this,"You can Withdraw only 100 ,200, 500, 2000", Toast.LENGTH_LONG).show();
                     return;
                 }
                 int remainingAmount = currAmount - withdrawAmount;

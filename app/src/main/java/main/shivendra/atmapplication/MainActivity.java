@@ -54,6 +54,11 @@ public class MainActivity extends AppCompatActivity {
                 }
                 if (withdrawAmount < 100) {
                     Toast.makeText(MainActivity.this, "Minimum Withdraw Amount is : 100!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(withdrawAmount % 100 != 0) {
+                    Toast.makeText(MainActivity.this,"You can Withdraw only 100 ,200, 500, 2000", Toast.LENGTH_SHORT).show();
+                    return;
                 }
                 int remainingAmount = currAmount - withdrawAmount;
                 amount.setText(String.valueOf(remainingAmount));

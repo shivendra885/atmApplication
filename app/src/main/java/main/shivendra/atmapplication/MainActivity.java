@@ -15,10 +15,14 @@ import androidx.core.view.WindowInsetsCompat;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
     TextView amount, one, two, five, twenty;
     Button btnWithdraw;
     EditText textAmount;
+    List<Transaction> transHistory = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +66,8 @@ public class MainActivity extends AppCompatActivity {
                 }
                 int remainingAmount = currAmount - withdrawAmount;
                 amount.setText(String.valueOf(remainingAmount));
+                Transaction trans = new Transaction();
+                trans.amount = withdrawAmount;
 
                 int twentiesToDeduct = withdrawAmount / 2000;
                 withdrawAmount %= 2000;
@@ -84,6 +90,16 @@ public class MainActivity extends AppCompatActivity {
                 one.setText(String.valueOf(currentOnes - onesToDeduct));
 
                 textAmount.setText("");
+
+                trans.isWithdrawal = true;
+                trans.one = onesToDeduct;
+                trans.two = fivesToDeduct;
+                trans.five = fiftiesToDeduct;
+                trans.twenty = twentiesToDeduct;
+                transHistory.add(trans);
+                for (int i=0;i<transHistory.size();i++) {
+                    System.out.println(transHistory.get(i).amount+" "+transHistory.get(i).twenty+" "+transHistory.get(i).five+" "+transHistory.get(i).two+" "+transHistory.get(i).one);
+                }
             }
         });
     }

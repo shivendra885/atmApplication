@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +23,8 @@ public class MainActivity extends AppCompatActivity {
     TextView amount, one, two, five, twenty;
     Button btnWithdraw;
     EditText textAmount;
+
+    TableLayout tableLayout;
     List<Transaction> transHistory = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
         twenty = findViewById(R.id.twenty);
         btnWithdraw = findViewById(R.id.btnWithdraw);
         textAmount = findViewById(R.id.textAmount);
+        tableLayout = findViewById(R.id.transTable);
+//        tableLayout.setVisibility(View.INVISIBLE);
         btnWithdraw.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -1,5 +1,6 @@
 package main.shivendra.atmapplication;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -98,31 +99,40 @@ public class MainActivity extends AppCompatActivity {
 
                 textAmount.setText("");
 
-                trans.one = onesToDeduct;
                 transHistory.add(trans);
                 for (int i=0;i<transHistory.size();i++) {
-                    System.out.println(transHistory.get(i).debitAmount+" "+transHistory.get(i).availAmount+" "+transHistory.get(i).one);
+                    System.out.println(transHistory.get(i).debitAmount+" "+transHistory.get(i).availAmount);
                     TableRow newRow = new TableRow(MainActivity.this);
-//                    TextView amountDebit = new TextView(MainActivity.this);
+                    TableRow.LayoutParams layoutParams = new TableRow.LayoutParams(
+                            TableRow.LayoutParams.WRAP_CONTENT,
+                            TableRow.LayoutParams.WRAP_CONTENT
+                    );
+                    newRow.setLayoutParams(layoutParams);
+
+                    TextView amountDebit = new TextView(MainActivity.this);
                     TextView amountCredit = new TextView(MainActivity.this);
                     TextView amountDate = new TextView(MainActivity.this);
-//                    amountDebit.setText(String.valueOf(transHistory.get(i).debitAmount));
+                    TableRow.LayoutParams textViewParams = new TableRow.LayoutParams(
+                            0,
+                            TableRow.LayoutParams.WRAP_CONTENT,
+                            1f
+                    );
+                    amountDebit.setTextColor(Color.WHITE);
+                    amountCredit.setTextColor(Color.WHITE);
+                    amountDate.setTextColor(Color.WHITE);
+                    amountDebit.setLayoutParams(textViewParams);
+                    amountCredit.setLayoutParams(textViewParams);
+                    amountDate.setLayoutParams(textViewParams);
+
+                    amountDebit.setText(String.valueOf(transHistory.get(i).debitAmount));
                     amountCredit.setText(String.valueOf(transHistory.get(i).debitAmount));
                     amountDate.setText(String.valueOf(transHistory.get(i).availAmount));
-//                    TableRow.LayoutParams params = new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1f);
-//                    amountDebit.setLayoutParams(params);
-//                    amountCredit.setLayoutParams(params);
-//                    amountDate.setLayoutParams(params);
-//                    amountDebit.setVisibility(View.VISIBLE);
-//                    amountDebit.setPadding(0, 0, 0, 0);
-
-//                    amountDat.setText(String.valueOf(transHistory.get(i).debitAmount));
-                    //newRow.addView(amountDebit);
+                    newRow.addView(amountDebit);
                     newRow.addView(amountCredit);
                     newRow.addView(amountDate);
-//                    newRow.addView(amountDat);
                     tableLayout.addView(newRow);
                 }
+                transHistory.removeAll(transHistory);
             }
         });
     }

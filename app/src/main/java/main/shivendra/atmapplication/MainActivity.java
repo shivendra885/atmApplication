@@ -103,33 +103,34 @@ public class MainActivity extends AppCompatActivity {
                 for (int i=0;i<transHistory.size();i++) {
                     System.out.println(transHistory.get(i).debitAmount+" "+transHistory.get(i).availAmount);
                     TableRow newRow = new TableRow(MainActivity.this);
+
                     TableRow.LayoutParams layoutParams = new TableRow.LayoutParams(
-                            TableRow.LayoutParams.WRAP_CONTENT,
+                            TableRow.LayoutParams.MATCH_PARENT,
                             TableRow.LayoutParams.WRAP_CONTENT
                     );
-                    newRow.setLayoutParams(layoutParams);
+                    layoutParams.weight = 1;
 
                     TextView amountDebit = new TextView(MainActivity.this);
+                    amountDebit.setLayoutParams(layoutParams);
+                    amountDebit.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
                     TextView amountCredit = new TextView(MainActivity.this);
-                    TextView amountDate = new TextView(MainActivity.this);
-                    TableRow.LayoutParams textViewParams = new TableRow.LayoutParams(
-                            0,
-                            TableRow.LayoutParams.WRAP_CONTENT,
-                            1f
-                    );
+                    amountCredit.setLayoutParams(layoutParams);
+                    amountCredit.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                    TextView reference = new TextView(MainActivity.this);
+                    reference.setLayoutParams(layoutParams);
+                    reference.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START);
+
                     amountDebit.setTextColor(Color.WHITE);
                     amountCredit.setTextColor(Color.WHITE);
-                    amountDate.setTextColor(Color.WHITE);
-                    amountDebit.setLayoutParams(textViewParams);
-                    amountCredit.setLayoutParams(textViewParams);
-                    amountDate.setLayoutParams(textViewParams);
+                    reference.setTextColor(Color.WHITE);
 
                     amountDebit.setText(String.valueOf(transHistory.get(i).debitAmount));
                     amountCredit.setText(String.valueOf(transHistory.get(i).debitAmount));
-                    amountDate.setText(String.valueOf(transHistory.get(i).availAmount));
+                    reference.setText(String.valueOf(System.currentTimeMillis()));
+
+                    newRow.addView(reference);
                     newRow.addView(amountDebit);
                     newRow.addView(amountCredit);
-                    newRow.addView(amountDate);
                     tableLayout.addView(newRow);
                 }
                 transHistory.removeAll(transHistory);

@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         btnWithdraw = findViewById(R.id.btnWithdraw);
         textAmount = findViewById(R.id.textAmount);
         tableLayout = findViewById(R.id.transTable);
-//        tableLayout.setVisibility(View.INVISIBLE);
+
         btnWithdraw.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,7 +73,8 @@ public class MainActivity extends AppCompatActivity {
                 int remainingAmount = currAmount - withdrawAmount;
                 amount.setText(String.valueOf(remainingAmount));
                 Transaction trans = new Transaction();
-                trans.amount = withdrawAmount;
+                trans.debitAmount = withdrawAmount;
+                trans.availAmount = remainingAmount;
 
                 int twentiesToDeduct = withdrawAmount / 2000;
                 withdrawAmount %= 2000;
@@ -96,14 +98,30 @@ public class MainActivity extends AppCompatActivity {
 
                 textAmount.setText("");
 
-                trans.isWithdrawal = true;
                 trans.one = onesToDeduct;
-                trans.two = fivesToDeduct;
-                trans.five = fiftiesToDeduct;
-                trans.twenty = twentiesToDeduct;
                 transHistory.add(trans);
                 for (int i=0;i<transHistory.size();i++) {
-                    System.out.println(transHistory.get(i).amount+" "+transHistory.get(i).twenty+" "+transHistory.get(i).five+" "+transHistory.get(i).two+" "+transHistory.get(i).one);
+                    System.out.println(transHistory.get(i).debitAmount+" "+transHistory.get(i).availAmount+" "+transHistory.get(i).one);
+                    TableRow newRow = new TableRow(MainActivity.this);
+//                    TextView amountDebit = new TextView(MainActivity.this);
+                    TextView amountCredit = new TextView(MainActivity.this);
+                    TextView amountDate = new TextView(MainActivity.this);
+//                    amountDebit.setText(String.valueOf(transHistory.get(i).debitAmount));
+                    amountCredit.setText(String.valueOf(transHistory.get(i).debitAmount));
+                    amountDate.setText(String.valueOf(transHistory.get(i).availAmount));
+//                    TableRow.LayoutParams params = new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1f);
+//                    amountDebit.setLayoutParams(params);
+//                    amountCredit.setLayoutParams(params);
+//                    amountDate.setLayoutParams(params);
+//                    amountDebit.setVisibility(View.VISIBLE);
+//                    amountDebit.setPadding(0, 0, 0, 0);
+
+//                    amountDat.setText(String.valueOf(transHistory.get(i).debitAmount));
+                    //newRow.addView(amountDebit);
+                    newRow.addView(amountCredit);
+                    newRow.addView(amountDate);
+//                    newRow.addView(amountDat);
+                    tableLayout.addView(newRow);
                 }
             }
         });
